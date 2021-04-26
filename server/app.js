@@ -14,18 +14,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-<<<<<<< HEAD
-const db = 'mongodb://localhost:27017/Project-Management';
-=======
 const db = 'mongodb://localhost:27017/Project-Manager';
->>>>>>> Feature/Server-setup
 mongoose.connect(db, { useNewUrlParser: true }).then(() => {
     console.log(`Database connected successfully ${db}`)
 }).catch(err => { 
     console.log(`Unable to connect with the database ${err}`)
 });
-<<<<<<< HEAD
-=======
 
 // Load the models
 require('./models/user');
@@ -58,4 +52,3 @@ const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`));
 
->>>>>>> Feature/Server-setup

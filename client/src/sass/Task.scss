@@ -1,0 +1,92 @@
+$colour-grey-light: rgb(193, 204, 198);
+$colour-grey: rgb(204, 204, 204);
+$colour-grey-dark: rgb(30, 30, 30);
+$colour-white: rgb(255, 255, 255);
+$colour-red: rgb(242, 139, 130);
+
+.task {
+  position: relative;
+  width: 95%;
+  max-width: 50rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 0.1rem solid $colour-grey;
+  border-radius: 1rem;
+  box-shadow: -0.5rem 0.5rem 0.8rem 0 $colour-grey-light;
+  background-color: $colour-white;
+
+  &:last-child {
+    margin-bottom: 1rem;
+  }
+
+  &:hover {
+    box-shadow: -0.5rem 0.5rem 0.8rem 0 $colour-grey-dark; 
+  }
+
+  input, select {
+    display: block;
+    outline: none;
+  }
+
+  .task__title {
+    font-size: 1.75rem;
+    border: none;
+    width: 80%;
+  }
+
+  .task__desc {
+    text-align: left;
+    margin: 1.5rem 0;
+    border: none;
+    width: 90%;
+    font-size: 1.2rem;
+    font-family: inherit;
+    outline: none;
+    resize: none;
+  }
+
+  .task__completed {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  @supports (-moz-appearance:meterbar) {
+    .task__completed {
+      height: 1rem;
+    }    
+  }
+
+  @mixin select_priority {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 0.5rem;
+    appearance: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .task__priority {
+    @include select_priority; 
+  }
+
+  .task__priority--high {
+    @include select_priority; 
+    background-color: $colour-red;
+    color: $colour-grey-dark;
+  }
+
+  .task__scheduledDt {
+    max-width: 12rem;
+    border: 0.1rem solid $colour-grey-light;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
+

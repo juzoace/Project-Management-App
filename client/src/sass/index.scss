@@ -1,0 +1,48 @@
+$colour-grey-dark: rgb(30, 30, 30);
+$colour-white-smoke: rgb(245, 245, 245);
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 75%;
+}
+
+@media (max-width: 650px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Roboto', Verdana, sans-serif;
+  color: $colour-grey-dark;
+  background-color: $colour-white-smoke;
+
+  input, select, textarea {
+    font-family: inherit;
+    color: inherit;
+  }
+
+  button {
+    font-family: inherit;
+    color: $colour-grey-dark;
+  }
+}
+
+h1 {
+  margin-top: 1.5rem;
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+p {
+  text-align: center;
+}

@@ -1,0 +1,28 @@
+$colour-grey-light: rgb(193, 204, 198);
+$colour-grey: rgb(204, 204, 204);
+$colour-grey-dark: rgb(52, 58, 64);
+$colour-white: rgb(255, 255, 255);
+
+.newTaskForm {
+  position: relative;
+  width: 95%;
+  max-width: 50rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 0.1rem solid $colour-grey;
+  border-radius: 1rem;
+  box-shadow: -0.5rem 0.5rem 0.8rem 0 $colour-grey-light;
+  background-color: $colour-white;
+
+  &:hover {
+    box-shadow: -0.5rem 0.5rem 0.8rem 0 $colour-grey-dark;
+  }
+
+  .newTaskForm__titleInput {
+    width: 70%;
+    font-size: 1.75rem;
+    border: none;
+    outline: none;
+  }
+}
