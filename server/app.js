@@ -23,7 +23,7 @@ mongoose.connect(db, { useNewUrlParser: true }).then(() => {
 
 // Load the models
 require('./models/user');
-
+require('./models/project');
 
 // Pass the global passport object into the configuration function
 require('./config/passport')(passport);

@@ -21,15 +21,15 @@ router.post('/register', async (req, res, next ) => {
      })
      if (nameRetrieved) return
     } 
-
-    if (usernameRetrieved) {
-           
-        res.status(491).json({
-           type: "Error", 
-           msg: "Username taken, try a different username "
-       })
-   } 
-   if (usernameRetrieved) return
+    console.log('here')
+//     if (usernameRetrieved) {
+//            console.log('here')
+//         res.status(491).json({
+//            type: "Error", 
+//            msg: "Username taken, try a different username "
+//        })
+//    } 
+//    if (usernameRetrieved) return
 
    if (emailRetrieved) {
              
@@ -40,16 +40,16 @@ router.post('/register', async (req, res, next ) => {
     })
 } if (emailRetrieved) return 
 
-if (nameRetrieved && usernameRetrieved) {
-    // Tell the user to check the name and username input fields
+// if (nameRetrieved && usernameRetrieved) {
+//     // Tell the user to check the name and username input fields
     
-    res.status(491).json({
-        type: "Error",
-        msg: "Change your name and username`"
-    })
-}
+//     res.status(491).json({
+//         type: "Error",
+//         msg: "Change your name and username`"
+//     })
+// }
 
-if (nameRetrieved && usernameRetrieved) return
+// if (nameRetrieved && usernameRetrieved) return
 
 if (nameRetrieved && emailRetrieved) {
     // Tell the user to check the name and email input fields
@@ -60,25 +60,25 @@ if (nameRetrieved && emailRetrieved) {
 }
 if (nameRetrieved && emailRetrieved) return
 
-if (usernameRetrieved && emailRetrieved) {
-    // Tell the user to check the username and email input fields
-    res.status(491).json({
-        type: "Error",
-        msg: "Change your Username and Email"
-    })
-}
-if (usernameRetrieved && emailRetrieved) return
+// if (usernameRetrieved && emailRetrieved) {
+//     // Tell the user to check the username and email input fields
+//     res.status(491).json({
+//         type: "Error",
+//         msg: "Change your Username and Email"
+//     })
+// }
+// if (usernameRetrieved && emailRetrieved) return
 
-if (nameRetrieved && usernameRetrieved && emailRetrieved) {
-    // Tell the user to check the name, username and email input fields
-    res.status(491).json({
-        type: "Error",
-        msg: "Change your Name, Username and Email" 
-    })
-};
-if (nameRetrieved && usernameRetrieved && emailRetrieved) return
+// if (nameRetrieved && usernameRetrieved && emailRetrieved) {
+//     // Tell the user to check the name, username and email input fields
+//     res.status(491).json({
+//         type: "Error",
+//         msg: "Change your Name, Username and Email" 
+//     })
+// };
+// if (nameRetrieved && usernameRetrieved && emailRetrieved) return
 
-if (!nameRetrieved && !usernameRetrieved && !emailRetrieved) {
+if (!nameRetrieved && !emailRetrieved) {
     // Everything is, unique proceed to create new user
 
     //   Generate hash and salt from the password
@@ -96,7 +96,7 @@ if (!nameRetrieved && !usernameRetrieved && !emailRetrieved) {
 
     const newUser = new User({
         name: req.body.name,
-        username: req.body.username,
+        // username: req.body.username,
         email: req.body.email,
         hash: hash,
         salt: salt,
@@ -115,19 +115,19 @@ if (!nameRetrieved && !usernameRetrieved && !emailRetrieved) {
 
 router.post('/login', async (req, res, next ) => {
 
-    User.findOne({ username: req.body.username})
+    User.findOne({ name: req.body.name})
         .then((user) => {
             if(!user) {
                 res.status(401).json({ success: false, msg: "Could not find user" })
             }
 
-            if (user.status != "Active") {
+            // if (user.status != "Active") {
                   
-                return res.status(401).send({
-                    msg: "Kindly verify your account. Click the activation link that was sent to your email  !",
-                  });
+                // return res.status(401).send({
+                //     msg: "Kindly verify your account. Click the activation link that was sent to your email  !",
+                //   });
 
-            } else {
+            // } else {
 
 
             const isValid = utils.validPassword(req.body.password, user.hash, user.salt)
@@ -139,10 +139,12 @@ router.post('/login', async (req, res, next ) => {
             
             } else {
             
+
                 res.status(401).json({ success: false, msg: "You entered the wrong password"})
-            
+
+
             }
-            }
+            // }
         })
         .catch((err) => {
             next(err);
