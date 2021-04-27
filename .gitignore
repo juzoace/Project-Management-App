@@ -1,0 +1,9 @@
+node_modules/
+client/node_modules/
+.env
+id_rsa_priv.pem
+node_modules
+id_rsa_pub.pem
+server/generateKeypair.js
+server/config/passport.js
+server/lib/utils.js
