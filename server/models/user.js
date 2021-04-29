@@ -12,21 +12,7 @@ const UserSchema = new Schema({
     projects: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Project'
-    }],
-    // status: {
-    //     type: String, 
-    //     enum: ['Pending', 'Active'],
-    //     default: 'Pending'
-    //   },
-      // confirmationCode: { 
-      //   type: String, 
-      //   unique: true },
-      roles: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Role"
-        }
-      ]
+    }]
 });
 
 // UserSchema.plugin(uniqueValidator);

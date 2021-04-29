@@ -6,6 +6,7 @@ const utils = require('../lib/utils');
 
 router.post('/register', async (req, res, next ) => { 
 
+    console.log(req.body)
     // Name database check
     const nameRetrieved = await User.findOne({ name: req.body.name });
         
@@ -22,6 +23,7 @@ router.post('/register', async (req, res, next ) => {
      if (nameRetrieved) return
     } 
     console.log('here')
+    
 //     if (usernameRetrieved) {
 //            console.log('here')
 //         res.status(491).json({
@@ -60,27 +62,9 @@ if (nameRetrieved && emailRetrieved) {
 }
 if (nameRetrieved && emailRetrieved) return
 
-// if (usernameRetrieved && emailRetrieved) {
-//     // Tell the user to check the username and email input fields
-//     res.status(491).json({
-//         type: "Error",
-//         msg: "Change your Username and Email"
-//     })
-// }
-// if (usernameRetrieved && emailRetrieved) return
-
-// if (nameRetrieved && usernameRetrieved && emailRetrieved) {
-//     // Tell the user to check the name, username and email input fields
-//     res.status(491).json({
-//         type: "Error",
-//         msg: "Change your Name, Username and Email" 
-//     })
-// };
-// if (nameRetrieved && usernameRetrieved && emailRetrieved) return
-
 if (!nameRetrieved && !emailRetrieved) {
     // Everything is, unique proceed to create new user
-
+    console.log("unique")
     //   Generate hash and salt from the password
     const saltHash = utils.genPassword(req.body.password);
 
@@ -88,25 +72,27 @@ if (!nameRetrieved && !emailRetrieved) {
 
     const hash = saltHash.hash;
 
-    const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let token = '';
-    for (let i = 0; i < 25; i++) {
-    token += characters[Math.floor(Math.random() * characters.length )];
-    }
-
     const newUser = new User({
         name: req.body.name,
-        // username: req.body.username,
         email: req.body.email,
         hash: hash,
-        salt: salt,
-        confirmationCode: token
+        salt: salt
+        // confirmationCode: token
     });
 
+
+    console.log(newUser)
     newUser.save()
     .then((user) => {
-   
+        console.log(user)
+        console.log('hey')
         // Send Email if you want to expand code
+        res.status(200).json({ success: true, user: user, msg: "User was registered successfully! "})
+    })
+    .catch((error) => {
+        
+        res.status(401).json({ success: false, msg: "Something went wrong"})
+
     })
 
 }
@@ -115,7 +101,7 @@ if (!nameRetrieved && !emailRetrieved) {
 
 router.post('/login', async (req, res, next ) => {
 
-    User.findOne({ name: req.body.name})
+    User.findOne({ email: req.body.email})
         .then((user) => {
             if(!user) {
                 res.status(401).json({ success: false, msg: "Could not find user" })
@@ -141,7 +127,6 @@ router.post('/login', async (req, res, next ) => {
             
 
                 res.status(401).json({ success: false, msg: "You entered the wrong password"})
-
 
             }
             // }

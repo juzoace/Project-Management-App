@@ -28,7 +28,7 @@ class App extends Component {
         </Switch>
       </Suspense>
     );
-
+      console.log(this.props.isAuthenticated)
     if ( this.props.isAuthenticated ) {
       routes = (
         <Suspense fallback={loading()}>
@@ -59,7 +59,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch( actions.authCheckState()),
+    onTryAutoSignup: () => dispatch( actions.authCheckState() ),
   };
 };
 

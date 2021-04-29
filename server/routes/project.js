@@ -56,7 +56,6 @@ router.post('/createProject', passport.authenticate('jwt', {session: false}), as
     
             userId.save()
         }
-       
         
     })
     .catch((err) => {
