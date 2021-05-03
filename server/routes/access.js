@@ -23,15 +23,7 @@ router.post('/register', async (req, res, next ) => {
      if (nameRetrieved) return
     } 
     console.log('here')
-    
-//     if (usernameRetrieved) {
-//            console.log('here')
-//         res.status(491).json({
-//            type: "Error", 
-//            msg: "Username taken, try a different username "
-//        })
-//    } 
-//    if (usernameRetrieved) return
+
 
    if (emailRetrieved) {
              
@@ -42,16 +34,7 @@ router.post('/register', async (req, res, next ) => {
     })
 } if (emailRetrieved) return 
 
-// if (nameRetrieved && usernameRetrieved) {
-//     // Tell the user to check the name and username input fields
-    
-//     res.status(491).json({
-//         type: "Error",
-//         msg: "Change your name and username`"
-//     })
-// }
 
-// if (nameRetrieved && usernameRetrieved) return
 
 if (nameRetrieved && emailRetrieved) {
     // Tell the user to check the name and email input fields
@@ -72,7 +55,7 @@ if (!nameRetrieved && !emailRetrieved) {
 
     const hash = saltHash.hash;
 
-    const newUser = new User({
+    const newUser = await new User({
         name: req.body.name,
         email: req.body.email,
         hash: hash,
@@ -80,9 +63,9 @@ if (!nameRetrieved && !emailRetrieved) {
         // confirmationCode: token
     });
 
-
     console.log(newUser)
-    newUser.save()
+    await newUser.save()
+    
     .then((user) => {
         console.log(user)
         console.log('hey')
@@ -103,17 +86,10 @@ router.post('/login', async (req, res, next ) => {
 
     User.findOne({ email: req.body.email})
         .then((user) => {
+            console.log(user)
             if(!user) {
                 res.status(401).json({ success: false, msg: "Could not find user" })
             }
-
-            // if (user.status != "Active") {
-                  
-                // return res.status(401).send({
-                //     msg: "Kindly verify your account. Click the activation link that was sent to your email  !",
-                //   });
-
-            // } else {
 
 
             const isValid = utils.validPassword(req.body.password, user.hash, user.salt)
@@ -121,7 +97,7 @@ router.post('/login', async (req, res, next ) => {
             if(isValid) { 
                 const tokenObject = utils.issueJWT(user);
                 
-                res.status(200).json({ success: true, msg: "Login Successful", user: user, token: tokenObject.token, expiresIn: "3600"})
+                res.status(200).json({ success: true, msg: "Successful", user: user, token: tokenObject.token, expiresIn: "3600"})
             
             } else {
             

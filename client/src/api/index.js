@@ -13,3 +13,6 @@ export const PasswordChangeurl = `${CLIENT_ORIGIN}/access/passwordChange`;
 
 // Project
 export const fetchProjectsUrl = `${CLIENT_ORIGIN}/project/fetchProjects`;
+export const createProjectUrl = `${CLIENT_ORIGIN}/project/createProject`;
+export const deleteProjectUrl = `${CLIENT_ORIGIN}/project/deleteProject`;
+export const updateProjectUrl = `${CLIENT_ORIGIN}/project/updateProject`

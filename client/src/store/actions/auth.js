@@ -187,7 +187,8 @@ export const login = (loginDetails) => {
                dispatch(authLoginSuccessAlert(response.data.msg)) 
 
                 setTimeout(() => {
-                     
+                    axios.defaults.headers.common['Authorization'] = response.data.token;
+                    //  console.log(response.data.token)
                 setAuthToken(response.data.token);
                 dispatch(authLoginSuccess(response.data.token, response.data.user._id))
                 dispatch(checkAuthTimeout(response.data.expiresIn));

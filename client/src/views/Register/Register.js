@@ -7,8 +7,8 @@ import {
 import { connect, useSelector, useDispatch } from 'react-redux';
 import PropTypes from "prop-types";
 import * as actions from "../../store/actions/index"
-import { useHistory } from 'react-router-dom';
-
+import { Link, useHistory } from 'react-router-dom';
+import './Register.css'
 const Register = ({onRegister}) => {
 
     let registerSuccess = useSelector(state => state.auth.registerSuccess);
@@ -36,7 +36,7 @@ const Register = ({onRegister}) => {
     useEffect(() => {
 
         if(registerSuccess) {
-          let registerSuccess = "Login successfully";
+          let registerSuccess = "Register successfully";
           setAlerts({ message: registerSuccess, type: "success" })  
 
           setTimeout(() => {
@@ -123,8 +123,11 @@ const Register = ({onRegister}) => {
               />
             </FormGroup>
           </Col>
-          <Button type="submit">Submit</Button>
+          <Button className="submit" type="submit">Submit</Button>
           {/* <Button type="submit">Submit</Button> */}
+          <div>
+          <Link  className="register" to="/login">Login Account</Link>
+          </div>
         </Form>
       </Container>
 

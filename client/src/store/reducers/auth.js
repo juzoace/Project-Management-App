@@ -57,7 +57,7 @@ const authErrorChange = (state, action) => {
 }
 
 const authLogout = (state, action) => {
-    return updateObject(state, { token: null, _id: null });
+    return updateObject(state, { token: null, _id: null, loginSuccess: null });
 }
  
 const authLoginFail = (state, action) => {

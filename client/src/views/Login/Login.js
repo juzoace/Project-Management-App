@@ -7,6 +7,8 @@ import {
 import { connect, useSelector, useDispatch } from 'react-redux';
 import PropTypes from "prop-types";
 import * as actions from "../../store/actions/index"
+import { useHistory, Link } from 'react-router-dom';
+import './Login.css'
 
 
 const Login = ({onLogin}) => {
@@ -14,7 +16,7 @@ const Login = ({onLogin}) => {
  
 let loginSuccess = useSelector(state => state.auth.loginSuccess);
 let loginError = useSelector(state => state.auth.loginError);
- 
+const history = useHistory();
   
 const initialState = {
     email: "",
@@ -41,11 +43,16 @@ useEffect(() => {
  
 }, [loginSuccess])
 
+
 const onSubmit = async (e) => {
         console.log(loginDetails)
     e.preventDefault();
 
     onLogin(loginDetails)
+}
+
+const switchToRegister = () => {
+  history.push('/login')
 }
 
 const TimeoutAlert = function ({ message, type }) {
@@ -77,7 +84,7 @@ const TimeoutAlert = function ({ message, type }) {
             <br></br>
             <br></br>
         <Container className="App">
-        <h2>Sign In</h2>
+        <h2> Login</h2>
         <Form className="form" onSubmit={onSubmit}>
         {alerts && <TimeoutAlert message={ alerts.message} type={ alerts.type}  />}
           <Col>
@@ -108,8 +115,12 @@ const TimeoutAlert = function ({ message, type }) {
               />
             </FormGroup>
           </Col>
-          <Button type="submit">Submit</Button>
-          {/* <Button type="submit">Submit</Button> */}
+          <Button className="submit" type="submit">Submit</Button>
+          <div>
+          <Link className="register" to="/register">Create New Account</Link>
+          </div>
+          
+          
         </Form>
       </Container>
       </div>
