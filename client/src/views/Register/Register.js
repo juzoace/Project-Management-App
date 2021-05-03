@@ -61,7 +61,6 @@ const Register = ({onRegister}) => {
         function onClick() {
           clearTimeout(timer)
     
-        //   clearScopeError();
     
           setAlerts(null);
         };
@@ -124,7 +123,7 @@ const Register = ({onRegister}) => {
             </FormGroup>
           </Col>
           <Button className="submit" type="submit">Submit</Button>
-          {/* <Button type="submit">Submit</Button> */}
+          
           <div>
           <Link  className="register" to="/login">Login Account</Link>
           </div>

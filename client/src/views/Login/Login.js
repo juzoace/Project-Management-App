@@ -61,8 +61,6 @@ const TimeoutAlert = function ({ message, type }) {
     function onClick() {
       clearTimeout(timer)
 
-    //   clearScopeError();
-
       setAlerts(null);
     };
 
@@ -141,9 +139,6 @@ const mapDispatchToProps = dispatch => {
         onLogin: (loginDetails) => dispatch(
             actions.login(loginDetails)
         ),
-        // onSetLoginErrorToNull: () => dispatch(
-        //     actions.setLoginErrorToNull()
-        // )
     };
 };
 
