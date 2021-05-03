@@ -22,7 +22,6 @@ router.post('/register', async (req, res, next ) => {
      })
      if (nameRetrieved) return
     } 
-    console.log('here')
 
 
    if (emailRetrieved) {
@@ -47,7 +46,7 @@ if (nameRetrieved && emailRetrieved) return
 
 if (!nameRetrieved && !emailRetrieved) {
     // Everything is, unique proceed to create new user
-    console.log("unique")
+  
     //   Generate hash and salt from the password
     const saltHash = utils.genPassword(req.body.password);
 
@@ -60,15 +59,12 @@ if (!nameRetrieved && !emailRetrieved) {
         email: req.body.email,
         hash: hash,
         salt: salt
-        // confirmationCode: token
     });
 
-    console.log(newUser)
     await newUser.save()
     
     .then((user) => {
-        console.log(user)
-        console.log('hey')
+        
         // Send Email if you want to expand code
         res.status(200).json({ success: true, user: user, msg: "User was registered successfully! "})
     })
@@ -86,7 +82,6 @@ router.post('/login', async (req, res, next ) => {
 
     User.findOne({ email: req.body.email})
         .then((user) => {
-            console.log(user)
             if(!user) {
                 res.status(401).json({ success: false, msg: "Could not find user" })
             }

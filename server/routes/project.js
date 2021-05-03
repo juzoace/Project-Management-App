@@ -7,15 +7,9 @@ const User = mongoose.model('User');
 
 router.post('/fetchProjects', passport.authenticate('jwt', {session: false}), async(req, res, next ) => {
     
-
-    console.log(req.headers)
-    console.log(req.body)
-    console.log('Entered fetch project')
     // Get the user Id
     await User.findById(req.body._id).populate("projects")
     .then((project) => {
-        console.log('13')
-       console.log(project.projects)
        
 
          // Send response to client
@@ -77,8 +71,6 @@ router.post('/createProject', passport.authenticate('jwt', {session: false}), as
     
 router.post('/updateProject', passport.authenticate('jwt', {session: false}), async(req, res, next) => {
 
-    // get particular project _id
-    console.log(req.body._id)
     await Project.findOneAndUpdate( {_id: req.body._id}, {
 
         title : req.body.title,
@@ -105,7 +97,7 @@ router.post('/updateProject', passport.authenticate('jwt', {session: false}), as
 })
 
 router.post('/deleteProject', passport.authenticate('jwt', {session: false}), async(req, res, next) => {
-    console.log("Got here")
+  
     // get particular project _id
     await Project.findByIdAndRemove({_id: req.body._id})
     .then((project) => {

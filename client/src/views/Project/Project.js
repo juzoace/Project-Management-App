@@ -111,11 +111,9 @@ const Project = ({onLogout}) => {
 
   const columns = [
     { title: "ID", field: "_id", editable: false },
-    // { title: "Name", field: "name" },
     { title: "Title", field: "title" },
     { title: "Description", field: 'description', },
     { title: "Deadline", field: "deadline", type: 'date' },
-    // { title: "Status", field: "status", lookup: {1: "Active", 2: "Done"} },
     { title: "Status", field: "status", lookup: {1: "Created", 2: "In Progress", 3: "Completed"} },
     { title: "Budget", field: "budget", }
   ]
@@ -123,11 +121,10 @@ const Project = ({onLogout}) => {
   const onRowAdd = async (newRow) => {
     await axios.post(`http://localhost:4000/project/createProject`, {...newRow, _id: userId})
     .then((response) => {
-      // console.log(response.data.data.status)
 
       const updatedRows = [...data, response.data.data]
       setTimeout(() => {
-        // console.log(updatedRows)
+    
         setData(updatedRows)
         
       }, 2000)
@@ -162,7 +159,7 @@ const Project = ({onLogout}) => {
     const updatedRows = [...data]
     await axios.post(`http://localhost:4000/project/deleteProject`, {_id: index})
     .then((response) => {
-      // console.log(response)
+      
       setTimeout(() => {
         for (var i = 0; i < updatedRows.length; i++) {
           if(updatedRows[i]._id == index ) {
@@ -181,8 +178,6 @@ const Project = ({onLogout}) => {
 
   const onRowUpdate = async (updatedRow,oldRow) => {
     const index=oldRow._id;
-    console.log(updatedRow)
-    // console.log(index);
     const updatedRows =[...data]
     await axios.post(`http://localhost:4000/project/updateProject`, {_id: index, title: updatedRow.title, description: updatedRow.description, deadline:updatedRow.deadline, budget: updatedRow.budget, status: updatedRow.status})
     .then((response) => {
@@ -210,7 +205,7 @@ const Project = ({onLogout}) => {
   return (
     <div className="App">
       <h1 align="center">Project Management App</h1>
-      {/* <PowerSettingsNewIcon/> */}
+      
 
       <div className="more"> 
       <Button
@@ -220,7 +215,7 @@ const Project = ({onLogout}) => {
         color="primary"
         onClick={handleClick}
         className="more"
-        // style = {"display: flex; justify-content:flex-end"}
+      
       >
         More
       </Button>
@@ -245,12 +240,6 @@ const Project = ({onLogout}) => {
            
            />
         </StyledMenuItem>
-        {/* <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </StyledMenuItem> */}
       </StyledMenu>
     </div>
 
